@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react';
 const cardList: PostSummary[] = [
   {
     id: 1,
-    slug: '/nestjs/cache',
+    slug: '/nestjs/caching',
     createdAt: '2023. 06. 09.',
     title: 'Nestjs REST 애플리케이션의 캐시 처리와 캐시 무효화',
     contents:
@@ -18,7 +18,7 @@ const cardList: PostSummary[] = [
   },
   {
     id: 2,
-    slug: '/docker/redis',
+    slug: '/redis/cluster',
     createdAt: '2022. 02. 18.',
     title: 'Docker로 Redis 클러스터 구성하기',
     contents:
@@ -28,7 +28,7 @@ const cardList: PostSummary[] = [
   },
   {
     id: 3,
-    slug: '/docker/redis1',
+    slug: '/AWS/architecting-on-aws',
     createdAt: '2022. 02. 18.',
     title: 'Docker로 Redis 클러스터 구성하기 2',
     contents:
@@ -38,7 +38,7 @@ const cardList: PostSummary[] = [
   },
   {
     id: 3,
-    slug: '/docker/redis2',
+    slug: '/git-github/git-manage',
     createdAt: '2022. 02. 18.',
     title: 'Docker로 Redis 클러스터 구성하기 3',
     contents:

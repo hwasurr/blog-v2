@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://hwasurr.com'),
   title: `Hwasurr's Devlog`,
   openGraph: {
-    images: '/favicon-96x96.png',
+    images: 'https://github.com/hwasurr.png',
   },
 };
 

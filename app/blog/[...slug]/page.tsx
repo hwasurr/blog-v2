@@ -8,6 +8,7 @@ import markdownItAncherPlugin from 'markdown-it-anchor';
 import path from 'path';
 import './page.css';
 import Utterances from '@/components/comments/utterances';
+import Image from 'next/image';
 
 const md = markdownit({
   linkify: true,
@@ -29,7 +30,6 @@ interface BlogSlugPageParams {
   slug: string | string[];
 }
 export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
-  console.log(params.slug);
   const url = path.resolve(
     `./content/blog/${Array.isArray(params.slug) ? params.slug.join('/') : params.slug}/index.md`,
   );
@@ -39,27 +39,28 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
   const { content, data: frontmatter } = matter(markdown);
   const rendered = md.render(content);
 
-  console.log(frontmatter);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between px-12 py-8">
       <article className="w-full">
         {/* posting metadata */}
         <section id="posting-metadata" className="flex flex-col justify-center gap-4 pb-12">
           {frontmatter.image ? (
-            <div style={{ textAlign: 'center' }}>
-              <div
-                className="mb-2 min-h-80 rounded-xl bg-center bg-no-repeat"
-                style={{
-                  backgroundSize: frontmatter.image.bgSize ?? 'cover',
-                  backgroundImage: `url(${frontmatter.image.src})`,
-                }}
-              />
-              {/* <Typography.muted className="mb-0 italic">
-                {frontmatter.image.description}{' '}
-                {frontmatter.image.author ? `(Pictured by ${frontmatter.image.author})` : null}
-              </Typography.muted> */}
-            </div>
+            <>
+              <figure>
+                <div className="relative min-h-80 w-full">
+                  <Image
+                    className="rounded-xl object-cover"
+                    src={frontmatter.image.src}
+                    alt={frontmatter.title}
+                    fill
+                  ></Image>
+                </div>
+                <figcaption className="my-2 text-center text-xs italic text-muted-foreground">
+                  {frontmatter.image.description}{' '}
+                  {frontmatter.image.author ? `(Pictured by ${frontmatter.image.author})` : null}
+                </figcaption>
+              </figure>
+            </>
           ) : null}
           <Typography.h1>{frontmatter.title}</Typography.h1>
           <Typography.muted>{frontmatter.description}</Typography.muted>

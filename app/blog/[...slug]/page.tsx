@@ -10,6 +10,8 @@ import './page.css';
 import Utterances from '@/components/comments/utterances';
 import Image from 'next/image';
 
+import 'highlight.js/styles/atom-one-dark.min.css';
+
 const md = markdownit({
   linkify: true,
   highlight: function (str, lang) {

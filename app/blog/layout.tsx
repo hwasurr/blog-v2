@@ -21,7 +21,6 @@ export default function BlogHome({ children }: PropsWithChildren): JSX.Element {
         className="sticky top-[121px] hidden h-[calc(100vh-121px)] w-[320px] py-2 lg:flex lg:shrink-0 lg:flex-col lg:justify-between"
       >
         <div></div>
-
         <ProfileCard />
       </aside>
     </main>

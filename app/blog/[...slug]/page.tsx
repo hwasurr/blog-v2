@@ -11,6 +11,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import path from 'path';
 import './page.css';
+import TimeToReadText from '@/components/text/time-to-read';
 
 interface BlogSlugPageProps {
   params: BlogSlugPageParams;
@@ -39,7 +40,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
   const { content, data: frontmatter } = matter(markdown);
   const rendered = md.render(content);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-12 py-8">
+    <div className="flex min-h-screen flex-col items-center justify-between md:px-12 md:py-8">
       <article className="w-full">
         {/* posting metadata */}
         <section id="posting-metadata" className="flex flex-col justify-center gap-4 pb-12">
@@ -65,7 +66,11 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
           <Typography.h1>{frontmatter.title}</Typography.h1>
           <Typography.muted>{frontmatter.description}</Typography.muted>
           <TagBadges tags={frontmatter.tags} />
-          <Typography.muted>{frontmatter.date}</Typography.muted>
+          <Typography.muted>
+            <TimeToReadText timeToRead={frontmatter.timeToRead || 30}></TimeToReadText>
+            {' • '}
+            {frontmatter.date}
+          </Typography.muted>
         </section>
 
         {/* posting contents */}
@@ -79,7 +84,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
       <section id="comments">
         <Utterances repo="hwasurr/hwasurr.io" />
       </section>
-    </main>
+    </div>
   );
 }
 

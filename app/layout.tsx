@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '../providers/theme.provider';
 import { SiteHeader } from '../components/nav/site-header';
+import { SiteFooter } from '@/components/footer/site-footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteHeader></SiteHeader>
           {children}
+          <SiteFooter></SiteFooter>
         </ThemeProvider>
       </body>
     </html>

@@ -9,8 +9,7 @@ import path from 'path';
 import './page.css';
 import Utterances from '@/components/comments/utterances';
 import Image from 'next/image';
-
-import 'highlight.js/styles/atom-one-dark.min.css';
+import 'highlight.js/styles/atom-one-light.min.css';
 
 const md = markdownit({
   linkify: true,

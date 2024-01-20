@@ -7,8 +7,11 @@ import { SiteHeader } from '../components/nav/site-header';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Hwasurr.com',
-  description: 'Homepage',
+  metadataBase: new URL('https://hwasurr.com'),
+  title: `Hwasurr's Devlog`,
+  openGraph: {
+    images: '/favicon-96x96.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {

@@ -214,7 +214,7 @@ export class AppModule {}
 
 여기서 유의할 점은 기존과는 달리 `ttl` 설정을 `clusterConfig.options.ttl` 에서 구성하여야 한다는 점입니다. 이렇게 구성한 뒤, 앞서 작성한 GET `/cats` 엔드포인트에 HTTP 요청시, 적절한 응답이 도착하면서, Redis상에 `/cats` 라는 키로 캐시되는 것을 확인할 수 있으며, 해당 캐시의 `ttl`이 작성한대로 15초로 적용되는 것을 확인할 수 있습니다.
 
-![캐시 결과](./nestjs-cache-1.png)
+![캐시 결과](/nestjs/caching/nestjs-cache-1.png)
 
 ### Nestjs 캐시 무효화
 

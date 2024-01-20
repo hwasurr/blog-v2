@@ -1,5 +1,13 @@
 import { ProfileCard } from '@/components/cards/profile-card';
 import { PropsWithChildren } from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: `%s | Hwasurr's Devlog`,
+    default: `Hwasurr's Devlog`,
+  },
+};
 
 export default function BlogHome({ children }: PropsWithChildren): JSX.Element {
   return (

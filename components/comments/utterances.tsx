@@ -11,7 +11,7 @@ export interface UtterancesProps {
 
 const Utterances: React.FC<UtterancesProps> = React.memo(({ repo }) => {
   const containerRef = createRef<HTMLDivElement>();
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useLayoutEffect(() => {
     const utterances = document.createElement('script');
@@ -21,7 +21,7 @@ const Utterances: React.FC<UtterancesProps> = React.memo(({ repo }) => {
       repo,
       'issue-term': 'pathname',
       label: 'comment',
-      theme: theme === 'dark' ? 'dark-blue' : 'github-light',
+      theme: resolvedTheme === 'dark' ? 'dark-blue' : 'github-light',
       crossOrigin: 'anonymous',
       async: 'true',
     };

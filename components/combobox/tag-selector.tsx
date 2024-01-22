@@ -1,25 +1,31 @@
 'use client';
 
+import { TagsResponseData } from '@/app/api/posts/tags/route';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import { useTagFilterStore } from '@/store/tag-filter-store';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export function TagSelector({
-  tags,
-  value,
-  onSelect,
-}: {
-  tags: { label: string; value: string }[];
-  value: string;
-  onSelect: (value: string) => void;
-}): JSX.Element {
+export function TagSelector(): JSX.Element {
+  const { selectedTag } = useTagFilterStore.getState();
   const [open, setOpen] = useState(false);
   function handleOpenToggle(): void {
     setOpen((x) => !x);
   }
+
+  const [tags, setTags] = useState<{ label: string; value: string }[]>([]);
+  useEffect(() => {
+    const getTags = async (): Promise<void> => {
+      const res = await fetch('http://localhost:3000' + '/api/posts/tags');
+      const _tags = ((await res.json()).data || []) as TagsResponseData['data'];
+      setTags(_tags.map((t) => ({ label: t, value: t })));
+    };
+    getTags();
+  }, []);
+
   return (
     <div>
       <Popover open={open} onOpenChange={handleOpenToggle}>
@@ -27,9 +33,9 @@ export function TagSelector({
           <Button
             variant="outline"
             role="combobox"
-            className={cn('w-[200px] justify-between', !value && 'text-muted-foreground')}
+            className={cn('w-[200px] justify-between', !selectedTag && 'text-muted-foreground')}
           >
-            {value ? tags.find((tag) => tag.value === value)?.label : '태그를 필터하세요.'}
+            {selectedTag ? tags.find((tag) => tag.value === selectedTag)?.label : '태그를 필터하세요.'}
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -43,13 +49,15 @@ export function TagSelector({
                   value={tag.label}
                   key={tag.value}
                   onSelect={() => {
-                    if (tag.value === value) onSelect('');
-                    else onSelect(tag.value);
+                    if (tag.value === selectedTag) useTagFilterStore.setState({ selectedTag: '' });
+                    else useTagFilterStore.setState({ selectedTag: tag.value });
                     handleOpenToggle();
                   }}
                 >
                   {tag.label}
-                  <CheckIcon className={cn('ml-auto h-4 w-4', tag.value === value ? 'opacity-100' : 'opacity-0')} />
+                  <CheckIcon
+                    className={cn('ml-auto h-4 w-4', tag.value === selectedTag ? 'opacity-100' : 'opacity-0')}
+                  />
                 </CommandItem>
               ))}
             </CommandGroup>

@@ -1,9 +1,8 @@
 export interface PostSummary {
-  id: number;
   slug: string;
   title: string;
   createdAt: string;
-  contents?: string;
+  description?: string;
   tags?: string[];
   timeToRead?: number;
 }

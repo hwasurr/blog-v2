@@ -1,28 +1,31 @@
+import { PostResponseData } from '@/app/api/posts/[...slug]/route';
 import Utterances from '@/components/comments/utterances';
 import { TagBadges } from '@/components/tags/badges';
+import TimeToReadText from '@/components/text/time-to-read';
 import { Typography } from '@/components/typography/typography';
-import { readFileAsync } from '@/lib/file-utils';
-import matter from 'gray-matter';
-import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-light.min.css';
-import markdownit from 'markdown-it';
-import markdownItAncherPlugin from 'markdown-it-anchor';
 import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
-import path from 'path';
 import './page.css';
-import TimeToReadText from '@/components/text/time-to-read';
+import { formatDate } from '@/lib/date-util';
 
-interface BlogSlugPageProps {
-  params: BlogSlugPageParams;
+async function getData(slug: string | string[]): Promise<Required<PostResponseData>> {
+  const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
+  const res = await fetch('http://localhost:3000' + '/api/posts/' + _slugParam);
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+  const data = (await res.json()) as PostResponseData;
+  if (!data) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Post not found');
+  }
+  return data;
 }
-interface BlogSlugPageParams {
-  slug: string | string[];
-}
+
 export async function generateMetadata({ params }: BlogSlugPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const markdown = await getMarkdown(params.slug);
-  if (!markdown) return {};
-  const { data: frontmatter } = matter(markdown);
+  const { frontmatter } = await getData(params.slug);
   const previousImages = (await parent).openGraph?.images || [];
   return {
     title: frontmatter.title,
@@ -30,15 +33,20 @@ export async function generateMetadata({ params }: BlogSlugPageProps, parent: Re
     keywords: frontmatter.tags,
     creator: 'Hwasoo Kang',
     openGraph: {
-      images: [frontmatter.image.src || '', ...previousImages],
+      images: [frontmatter.image?.src || '', ...previousImages],
     },
   };
 }
+
+interface BlogSlugPageProps {
+  params: BlogSlugPageParams;
+}
+interface BlogSlugPageParams {
+  slug: string | string[];
+}
 export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
-  const markdown = await getMarkdown(params.slug);
-  if (!markdown) return <main>404</main>;
-  const { content, data: frontmatter } = matter(markdown);
-  const rendered = md.render(content);
+  const data = await getData(params.slug);
+  const { contentHtml, frontmatter } = data;
   return (
     <div className="flex min-h-screen flex-col items-center justify-between md:px-12 md:py-8">
       <article className="w-full">
@@ -69,15 +77,15 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
           <Typography.muted>
             <TimeToReadText timeToRead={frontmatter.timeToRead || 30}></TimeToReadText>
             {' • '}
-            {frontmatter.date}
+            {formatDate(frontmatter.createdAt || frontmatter.date)}
           </Typography.muted>
         </section>
 
         {/* posting contents */}
         <section
           id="posting-contents"
-          className="markdown-body w-full"
-          dangerouslySetInnerHTML={{ __html: rendered }}
+          className="markdown-body w-full pt-12"
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
         ></section>
       </article>
 
@@ -86,25 +94,4 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
       </section>
     </div>
   );
-}
-
-const md = markdownit({
-  linkify: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(str, { language: lang }).value;
-      } catch (__) {}
-    }
-    return ''; // use external default escaping
-  },
-});
-md.use(markdownItAncherPlugin, {
-  permalink: markdownItAncherPlugin.permalink.ariaHidden({ placement: 'before' }),
-});
-
-async function getMarkdown(slug: string | string[]): Promise<Buffer | null> {
-  const url = path.resolve(`./content/blog/${Array.isArray(slug) ? slug.join('/') : slug}/index.md`);
-  const markdown = await readFileAsync(url);
-  return markdown || null;
 }

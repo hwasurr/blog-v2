@@ -1,4 +1,5 @@
 import { getTimeToRead } from '@/lib/md-util';
+import { getRandomColor } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
 import fs from 'fs';
 import matter from 'gray-matter';
@@ -16,12 +17,13 @@ export async function GET(request: Request): Promise<Response> {
     const slug = fp.endsWith(mdfilename) ? fp.slice(0, fp.length - mdfilename.length) : fp;
     const mdContents = fs.readFileSync(filePath);
     const { content, data: frontmatter } = matter(mdContents);
+    const tags = frontmatter.tags.map((t: string) => ({ name: t, color: getRandomColor() }));
     return {
       slug,
       title: frontmatter.title,
       createdAt: frontmatter.createdAt || frontmatter.date,
       description: frontmatter.description,
-      tags: frontmatter.tags || [],
+      tags: tags || [],
       timeToRead: frontmatter.timeToRead || getTimeToRead(content),
     };
   });

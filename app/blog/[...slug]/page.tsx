@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: BlogSlugPageProps, parent: Re
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    keywords: frontmatter.tags,
+    keywords: frontmatter.tags.map((t) => t.name),
     creator: 'Hwasoo Kang',
     openGraph: {
       images: [frontmatter.image?.src || '', ...previousImages],

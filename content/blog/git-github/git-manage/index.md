@@ -186,27 +186,27 @@ code .
 
 이후 code . 을 통해 vscode를 열었습니다. 간단한 파일은 다음과 같습니다.
 
-![git-manage](./git-manage.png)
+![git-manage](/git-manage/git-manage.png)
 
 이후 터미널에서 `git init` 명령을 통해 현재 git 폴더로 설정해 줍니다. source control탭에 변화가 생긴것을 볼 수 있습니다.
 
-![git-manage2.png](./git-manage2.png)
+![git-manage2.png](/git-manage/git-manage2.png)
 
 소스컨트롤 탭으로 들어가면 다음과 같이 변경사항이 있는 파일들이 목록화되어 있습니다.
 
 ### 스테이징과 커밋
 
-![git-manage2.png](./git-manage2.png)
+![git-manage2.png](/git-manage/git-manage2.png)
 
 이 파일들은 아직 스테이징 되지 않은 파일입니다. `git add test.js` 명령 또는 `+` 버튼을 클릭함을 통해 스테이징 시킬수 있습니다.
 
 이 상태에서 스테이징 된 파일과 되지 않은 파일이 커밋시 어떻게 다르게 동작하는 지 확인하기 위해 두번째 파일을 생성해 보겠습니다. 좌측 탭의 가장 상단 Explorer로 돌아가 `test2.js` 파일을 생성합니다.
 
-![git-manage3.png](git-manage3.png)
+![git-manage3.png](/git-manage/git-manage3.png)
 
 이후 다시 소스컨트롤로 돌아가면 다음과 같이 스테이지된 파일과 되지않은 파일이 나누어 리스팅 되는 것을 볼 수 있습니다.
 
-![git-manage4.png](git-manage4.png)
+![git-manage4.png](/git-manage/git-manage4.png)
 
 여기서 스테이지된 test.js 파일을 `git commit -m "test commit"` 또는 Message 입력칸에 커밋 메시지 입력 후, 체크✔️버튼으로 커밋합니다.
 
@@ -219,13 +219,13 @@ git config --global user.email <your@github.email>
 
 스테이지된 파일만 커밋이 된 것을 확인할 수 있습니다. 이제 남은 `test2.js` 파일도 커밋합니다.
 
-![git-manage5.png](git-manage5.png)
+![git-manage5.png](/git-manage/git-manage5.png)
 
 ### 로그 확인
 
 터미널에서 `git log` 명령을 통해 커밋 히스토리를 확인하면 다음과 같을 것입니다.
 
-![git-manage6.png](git-manage6.png)
+![git-manage6.png](/git-manage/git-manage6.png)
 
 ### 원격 저장소 생성 및 연결
 
@@ -233,7 +233,7 @@ git config --global user.email <your@github.email>
 
 먼저 깃헙에서 저장소로 사용할 repository를 생성합니다. 저는 `git-test` 라는 이름의 레파지토리를 private 권한으로 다음과 같이 생성하겠습니다.
 
-![git-manage7.png](git-manage7.png)
+![git-manage7.png](/git-manage/git-manage7.png)
 
 repository를 생성한 이후, vscode로 돌아와 작업하던 폴더에 방금 생성한 repository를 연결하도록 합니다. repository의 uri는 `https://github.com/<your name>/<repo name>.git` 과 같습니다.
 
@@ -249,7 +249,7 @@ git remote get-url origin
 
 올바른 링크가 출력되는 것을 확인하고, 원격 저장소로 지금껏 작업했던 내용을 아래의 `push` 명령 또는 `...` 버튼 > `push`를 클릭하여 업로드 합니다.
 
-![git-manage8.png](git-manage8.png)
+![git-manage8.png](/git-manage/git-manage8.png)
 
 ```bash
 git push -u origin master
@@ -261,7 +261,7 @@ github에서 vscode에서 github에 접근할 권한을 요청한다면 승인�
 
 다시 브라우저를 열고 github의 repository 페이지로 돌아가면, 다음과 같이 github 원격 저장소에 로컬의 변경사항들이 올바르게 반영되어 있는 것을 볼 수 있습니다.
 
-![git-manage9.png](git-manage9.png)
+![git-manage9.png](/git-manage/git-manage9.png)
 
 ### 브랜치 별 관리
 
@@ -277,7 +277,7 @@ git checkout -b dev
 
 위의 명령어를 실행하면, 브랜치가 만들어짐과 동시에 좌측 아래 브랜치가 `dev`브랜치로 옮겨진 것을 확인할 수 있습니다.
 
-![git-manage10.png](git-manage10.png)
+![git-manage10.png](/git-manage/git-manage10.png)
 
 여기서 한가지 알아야 할 것은 이 브랜치는 현재 작업중인 당신의 컴퓨터 로컬에서만 생성된 것 이라는 사실입니다. 원격 저장소 github으로 가서 아무리 새로고침해봐도 `dev`브랜치는 찾을 수 없습니다. 원격 저장소에 새로운 branch `dev`의 존재를 반영하기 위해 `push`명령을 실행합니다.
 
@@ -287,11 +287,11 @@ git push -u origin dev
 
 이후, `test.js` 파일을 다음과 같이 조금 변경합니다. 이후 "sayhello word 변경"이라는 커밋메시지를 작성하고 체크 버튼을 이용해 커밋합니다.
 
-![git-manage11.png](git-manage11.png)
+![git-manage11.png](/git-manage/git-manage11.png)
 
 vscode 좌측 하단 상태바를 통해 origin 원격 저장소에서 pull 할 수 있는 커밋의 수와 origin 원격 저장소로 push할 수 있는 커밋의 수를 확인할 수 있습니다.
 
-![git-manage12.png](git-manage12.png)
+![git-manage12.png](/git-manage/git-manage12.png)
 
 원격저장소의 dev브랜치로 지금의 변경사항을 반영하기 위해 명령어를 작성하거나, ... > push 버튼을 눌러 푸시합니다.
 
@@ -301,11 +301,11 @@ git push origin dev
 
 이후 github repository로 돌아가 Branch를 dev로 변경하여 변경사항이 제대로 반영되었는지 확인해 봅니다.
 
-![git-manage13.png](git-manage13.png)
+![git-manage13.png](/git-manage/git-manage13.png)
 
 올바르게 변경되었음을 확인할 수 있습니다.
 
-![git-manage14.png](git-manage14.png)
+![git-manage14.png](/git-manage/git-manage14.png)
 
 ### 풀리퀘스트
 
@@ -315,11 +315,11 @@ git push origin dev
 
 올바르게 dev에서 master로 향하도록 설정하면, 자동으로 변경사항을 다음과 같이 알려줍니다. `this is test` 에서 `this is test - updated`로 word 변수가 변경된 것을 확인할 수 있습니다. `Create pull request` 버튼을 눌러 생성하고자 하는 풀리퀘스트의 제목과 내용을 작성한 이후, 풀리퀘스트를 생성합니다. 제목과 내용은 무엇에 대한 변경사항인지 알 수 있도록 명확하게 작성합니다.
 
-![git-manage15.png](git-manage15.png)
+![git-manage15.png](/git-manage/git-manage15.png)
 
 다음과 같이 풀리퀘스트가 생성되었습니다.
 
-![git-manage16.png](git-manage16.png)
+![git-manage16.png](/git-manage/git-manage16.png)
 
 커밋 메시지를 클릭하면 해당 커밋에서 어떤 변경사항이 있었는 지 확인할 수 있습니다. `sayhello word 변경` 커밋을 클릭합니다.
 
@@ -328,11 +328,11 @@ git push origin dev
 
 예를 들어, sayHello 함수의 word 변수명이 모호하다고 생각되어 greetingWord 라는 이름으로 변경하기를 제안해보겠습니다. 내용을 작성하고 `Start a review`를 클릭해 리뷰를 시작합니다. (Add a single comment는 리뷰가 아닌 단순 코멘트를 작성하는 버튼입니다. 새로운 내용을 배웠다거나 칭찬을 하고싶을 때 주로 쓰면 될 것 같아요..)
 
-![git-manage17.png](git-manage17.png)
+![git-manage17.png](/git-manage/git-manage17.png)
 
 이렇게 작성한 리뷰는 우측 상단의 Finish your review를 클릭하면 github repository에 반영됩니다. (여러개의 리뷰를 동시에 진행할 수 있습니다.)
 
-![git-manage18.png](git-manage18.png)
+![git-manage18.png](/git-manage/git-manage18.png)
 
 작성한 여러 review에 대한 총체적 comment를 달 수 있고, 리뷰의 타입을 선택할 수 있습니다. `Comment`는 간단한 피드백 에 대한 내용, `Approve`는 리뷰 승인, `Request changes`는 코드에 문제가 있다고 판단되며 코드를 반드시 수정 요구한다는 의미를 담고 있습니다. 현재는 자신이 생성한 풀리퀘스트에 자신이 리뷰를 진행하고 있어 `Approve`와 `Request changes`가 비활성화된 상태입니다. 연습을 위한 것이니, `Comment`로 리뷰를 게시합니다.
 
@@ -340,13 +340,13 @@ git push origin dev
 
 게시한 리뷰는 다음과 같이 나타납니다.
 
-![git-manage19.png](git-manage19.png)
+![git-manage19.png](/git-manage/git-manage19.png)
 
 해당 리뷰에 대해서 서로 의견을 나눌 수 있습니다. 풀리퀘스트 게시자는 변경해야 마땅하다는 판단이 들면, 새로 변경사항을 동일 브랜치에 커밋, 푸시하면 풀리퀘스트에도 자동으로 변경사항이 적용됩니다.
 
 다시 vscode로 돌아가 코드를 변경하고 커밋, 푸시합니다.
 
-![git-manage20.png](git-manage20.png)
+![git-manage20.png](/git-manage/git-manage20.png)
 
 ```bash
 git commit -m "sayHello word => gretting word"
@@ -355,9 +355,9 @@ git push
 
 푸시 이후 풀리퀘스트 창으로 돌아가면, 리뷰 아래에 새로운 커밋이 생긴것을 볼 수 있습니다. 이런 식으로 지속적으로 피드백하고, 변경하며 코드리뷰를 진행할 수 있습니다.
 
-![git-manage21.png](git-manage21.png)
+![git-manage21.png](/git-manage/git-manage21.png)
 
-이후 모든 코드리뷰가 완료되면 `Merge pull request` 버튼을 클릭해 이 풀리퀘스트의 변경사항을 `master`로 반영합니다. 이 때, `merge`의 세 가지의 기술적 방식이 있는데, 이는 차차 알아가면 될 것입니다. 이 [링크](https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-%EA%B3%A0%EA%B8%89-Merge)를 참고하면 될 것 같습니다. 여기서는 기본으로 설정되어 있는 `Create a merge commit` 방식(master 브랜치에 merge에 대한 새로운 커밋을 생성)으로 진행하겠습니다.
+이후 모든 코드리뷰가 완료되면 `Merge pull request` 버튼을 클릭해 이 풀리퀘스트의 변경사항을 `master`로 반영합니다. 이 때, `merge`의 세 가지의 기술적 방식이 있는데, 이는 차차 알아가면 될 것입니다. 이 [링크](/git-manage/https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-%EA%B3%A0%EA%B8%89-Merge)를 참고하면 될 것 같습니다. 여기서는 기본으로 설정되어 있는 `Create a merge commit` 방식(master 브랜치에 merge에 대한 새로운 커밋을 생성)으로 진행하겠습니다.
 
 해당 pull request를 merge한 이후 github repository master 브랜치의 소스코드를 확인하면 변경사항이 올바르게 적용된 것을 확인할 수 있습니다.
 

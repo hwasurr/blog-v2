@@ -16,6 +16,7 @@ async function getMarkdown(slug: string): Promise<Buffer | null> {
 }
 const md = markdownit({
   linkify: true,
+  html: true,
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {

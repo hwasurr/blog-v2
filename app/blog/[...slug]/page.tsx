@@ -8,6 +8,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import './page.css';
 import { formatDate } from '@/lib/date-util';
+import { useTheme } from 'next-themes';
 
 async function getData(slug: string | string[]): Promise<Required<PostResponseData>> {
   const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
@@ -88,9 +89,11 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         ></section>
       </article>
-
-      <section id="comments">
-        <Utterances repo="hwasurr/hwasurr.io" />
+      <section id="comments" className="utterances-dark w-full">
+        <Utterances repo="hwasurr/hwasurr.io" theme="dark" slug={params.slug} />
+      </section>
+      <section id="comments" className="utterances-light w-full">
+        <Utterances repo="hwasurr/hwasurr.io" theme="light" slug={params.slug} />
       </section>
     </div>
   );

@@ -265,7 +265,7 @@ cdk 에서 정의한 인프라를 생성, 설정하는 모든 과정에 대해�
 
 배포 이후 아래의 화면과 비슷한 로그 결과를 얻을 수 있다.
 
-![cdk deploy result](./cdk_deploy_result.png)
+![cdk deploy result](/infrastructure-as-code/cdk_deploy_result.png)
 
 이후 AWS console 에서 s3 대시보드에 들어가 보면, 새로 생성된 버킷을 확인할 수 있다.
 

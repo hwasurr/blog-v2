@@ -1,3 +1,16 @@
+.dark .utterances-light {
+  display: none;
+}
+.dark .utterances-dark {
+  display: block;
+}
+.light .utterances-light {
+  display: block;
+}
+.light .utterances-dark {
+  display: none;
+}
+
 .dark .markdown-body,
 [data-theme="dark"] {
   /*dark*/

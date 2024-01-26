@@ -179,7 +179,7 @@ query {
 
 간단하게 그림으로 요약하면 다음과 같습니다.
 
-![rest-graphql-differences](./rest-graphql.png)
+![rest-graphql-differences](/rest-graphql-differences/rest-graphql.png)
 
 ## 마치면서
 

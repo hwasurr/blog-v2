@@ -34,7 +34,7 @@ docker run -d -p 6379:6379 --name redis-test --platform=linux/x86_64 redis:6.2
 docker exec -it redis-test redis-cli
 ```
 
-![레디스 CLI 접속](redis-cli.png)
+![레디스 CLI 접속](/redis/redis-cli.png)
 
 # 레디스 클러스터 모드
 
@@ -135,8 +135,8 @@ docker exec -it redis-test -c
 
 위 명령어로 레디스 노드 컨테이너에 접속해 `CLUSTER INFO` 와 `CLUSTER NODES` 명령을 통해 클러스터 설정이 올바르게 되었는 지 확인해봅니다.
 
-![레디스 클러스터 정보 확인](redis-cluster-info.png)
+![레디스 클러스터 정보 확인](/redis/redis-cluster-info.png)
 
 `SET`, `GET` 명령을 통해 데이터를 입력했을 때 다음과 같이 자동으로 분산 저장되고, 분산 저장된 데이터를 올바르게 불러오는 것을 확인할 수 있습니다.
 
-![레디스 클러스터 커맨드 결과](redis-cluster-command.png)
+![레디스 클러스터 커맨드 결과](/redis/redis-cluster-command.png)

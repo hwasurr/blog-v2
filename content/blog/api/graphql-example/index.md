@@ -373,7 +373,7 @@ yarn add @apollo/react-hooks graphql-tag apollo-client apollo-cache-inmemory apo
 
 react hook으로 GraphQL쿼리를 관리하기 위한 `@apollo/react-hooks`, graphql의 자바스크립트 구현체 `graphql`, GraphQL 쿼리 파싱 템플릿 리터럴 태그 `graphql-tag`, Apollo 에서 제공하는 graphQL 관련 라이브러리 `apollo-client`, `apollo-cache-inmemory`, `apollo-link-http` 등을 설치합니다. package.json의 dependencies 목록은 다음과 같을 것입니다.
 
-![react-packagejson.png](./react-packagejson.png)
+![react-packagejson.png](/graphql-example/react-packagejson.png)
 
 설치 이후, `src/index.js` 파일에서, ApolloClient를 생성하고 ApolloProvider 컴포넌트를 App 컴포넌트 위에 래핑해 줍니다.
 

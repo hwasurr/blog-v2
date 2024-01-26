@@ -1,27 +1,26 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import React, { createRef, useLayoutEffect } from 'react';
 
 const src = 'https://utteranc.es/client.js';
 
 export interface UtterancesProps {
   repo: string;
+  slug: string | string[];
+  theme: 'dark' | 'light';
 }
 
-const Utterances: React.FC<UtterancesProps> = React.memo(({ repo }) => {
+const Utterances: React.FC<UtterancesProps> = React.memo(({ repo, theme, slug }) => {
   const containerRef = createRef<HTMLDivElement>();
-  const { resolvedTheme } = useTheme();
-
   useLayoutEffect(() => {
     const utterances = document.createElement('script');
 
     const attributes = {
       src,
       repo,
-      'issue-term': 'pathname',
-      label: 'comment',
-      theme: resolvedTheme === 'dark' ? 'dark-blue' : 'github-light',
+      'issue-term': Array.isArray(slug) ? slug.join('/') : slug,
+      label: '✨💬✨',
+      theme: theme === 'dark' ? 'dark-blue' : 'github-light',
       crossOrigin: 'anonymous',
       async: 'true',
     };
@@ -31,7 +30,7 @@ const Utterances: React.FC<UtterancesProps> = React.memo(({ repo }) => {
     });
 
     containerRef.current?.appendChild(utterances);
-  }, [repo]);
+  }, [containerRef, repo, theme]);
 
   return <div ref={containerRef} />;
 });

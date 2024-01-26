@@ -30,7 +30,7 @@ ECS는 두가지의 시작 유형을 가지고 있다. 관리하는 서버를 �
 새로운 또는 기존의 VPC(Virtual Private Cloud: 사용자의 AWS 계정 전용 가상 네트워크)에서 ECS 클러스터를 생성할 수 있다.
 클러스터를 실행한 후 클러스터 사이에서 실행할 도커 컨테이너 이미지를 지정하는 **작업 정의** 및 **서비스**를 정의할 수 있다. 도커 컨테이너 이미지는 **컨테이너 레지스트리(ECR or Docker Hub)**에 저장 및 pull 된다.
 
-![ecs_architecture](./ecs_architecture.png)
+![ecs_architecture](/microservice-with-ecs/ecs_architecture.png)
 AWS ECS - Fargete시작 유형 환경의 아키텍처
 
 ## ECS의 개별 요소(개념)
@@ -197,6 +197,6 @@ Fargate의 경우, 클러스터 인프라가 AWS에 의해서 완전하게 관�
    - 비싸다 ( key-value 하나당 0.4USD, 10000 요청 당 0.05USD)
    - 여러 계정으로 Access 가능
 
-![parameter-store-vs-scerets-manager](parameter-store-vs-scerets-manager.png)
+![parameter-store-vs-scerets-manager](/microservice-with-ecs/parameter-store-vs-scerets-manager.png)
 
 SSM Parameter Store, Secrets Manager 둘 모두, IAM 역할을 설정 한 뒤에 작업 정의 과정에서 ECS 컨테이너에 환경 변수로 데이터를 전달할 수 있다.

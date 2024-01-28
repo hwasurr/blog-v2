@@ -9,10 +9,21 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { navConfig } from '@/config/nav';
 import { siteConfig } from '@/config/site';
+import { getPosts } from '@/hooks/quries/get-posts';
 import { cn } from '@/lib/utils';
+import { PostSummary } from '@/types/post.type';
 
 export function MobileNav(): JSX.Element {
   const [open, setOpen] = React.useState(false);
+
+  const [posts, setPosts] = React.useState<PostSummary[]>([]);
+  React.useEffect(() => {
+    async function getDate(): Promise<void> {
+      const result = await getPosts();
+      setPosts(result.data || []);
+    }
+    getDate();
+  }, []);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -51,41 +62,31 @@ export function MobileNav(): JSX.Element {
         <MobileLink href="/" className="flex items-center" onOpenChange={setOpen}>
           <span className="font-bold">{siteConfig.name}</span>
         </MobileLink>
+
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
             {navConfig.mainNav?.map(
               (item) =>
                 item.href && (
-                  <MobileLink key={item.href} href={item.href} onOpenChange={setOpen}>
+                  <MobileLink key={item.href} href={item.href} onOpenChange={setOpen} className="font-medium">
                     {item.title}
                   </MobileLink>
                 ),
             )}
-          </div>
-          <div className="flex flex-col space-y-2">
-            {navConfig.sidebarNav.map((item, index) => (
-              <div key={index} className="flex flex-col space-y-3 pt-6">
-                <h4 className="font-medium">{item.title}</h4>
-                {item?.items?.length &&
-                  item.items.map((_item) => (
-                    <React.Fragment key={_item.href}>
-                      {!_item.disabled &&
-                        (_item.href ? (
-                          <MobileLink href={_item.href} onOpenChange={setOpen} className="text-muted-foreground">
-                            {_item.title}
-                            {_item.label && (
-                              <span className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline">
-                                {_item.label}
-                              </span>
-                            )}
-                          </MobileLink>
-                        ) : (
-                          _item.title
-                        ))}
-                    </React.Fragment>
-                  ))}
-              </div>
-            ))}
+            <h4 className="font-medium">Blog Posts</h4>
+            <ul className="flex flex-col gap-2">
+              {posts.map((item) => (
+                <li key={item.href}>
+                  {item.href ? (
+                    <MobileLink href={item.href} onOpenChange={setOpen} className="text-muted-foreground">
+                      {item.title}
+                    </MobileLink>
+                  ) : (
+                    item.title
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </ScrollArea>
       </SheetContent>

@@ -4,6 +4,7 @@ interface PostTag {
 }
 export interface PostSummary {
   slug: string;
+  href: string;
   title: string;
   createdAt: string;
   description?: string;

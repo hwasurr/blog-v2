@@ -4,6 +4,7 @@ import { TagsResponseData } from '@/app/api/posts/tags/route';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { useTagFilterStore } from '@/store/tag-filter-store';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
@@ -19,7 +20,7 @@ export function TagSelector(): JSX.Element {
   const [tags, setTags] = useState<{ label: string; value: string }[]>([]);
   useEffect(() => {
     const getTags = async (): Promise<void> => {
-      const res = await fetch('http://localhost:3000' + '/api/posts/tags');
+      const res = await fetch(siteConfig.baseURL + '/api/posts/tags');
       const _tags = ((await res.json()).data || []) as TagsResponseData['data'];
       setTags(_tags.map((t) => ({ label: t, value: t })));
     };

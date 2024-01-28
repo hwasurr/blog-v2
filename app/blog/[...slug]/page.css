@@ -545,8 +545,13 @@
 .markdown-body .anchor {
   float: left;
   padding-right: 4px;
-  margin-left: -20px;
-  line-height: 1;
+  margin-left: -16px;
+  line-height: 1.3;
+}
+@media (max-width: 768px) {
+  .markdown-body .anchor {
+    display: none;
+  }
 }
 
 .markdown-body .anchor:focus {

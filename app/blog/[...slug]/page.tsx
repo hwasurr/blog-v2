@@ -3,16 +3,16 @@ import Utterances from '@/components/comments/utterances';
 import { TagBadges } from '@/components/tags/badges';
 import TimeToReadText from '@/components/text/time-to-read';
 import { Typography } from '@/components/typography/typography';
+import { siteConfig } from '@/config/site';
+import { formatDate } from '@/lib/date-util';
 import 'highlight.js/styles/atom-one-light.min.css';
 import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import './page.css';
-import { formatDate } from '@/lib/date-util';
-import { useTheme } from 'next-themes';
 
 async function getData(slug: string | string[]): Promise<Required<PostResponseData>> {
   const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
-  const res = await fetch('http://localhost:3000' + '/api/posts/' + _slugParam);
+  const res = await fetch(siteConfig.baseURL + '/api/posts/' + _slugParam);
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data');
@@ -52,7 +52,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
     <div className="flex min-h-screen flex-col items-center justify-between md:px-12 md:py-8">
       <article className="w-full">
         {/* posting metadata */}
-        <section id="posting-metadata" className="flex flex-col justify-center gap-4 pb-12">
+        <section id="posting-metadata" className="flex flex-col justify-center gap-4 pb-4 md:pb-12">
           {frontmatter.image ? (
             <>
               <figure>
@@ -85,7 +85,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
         {/* posting contents */}
         <section
           id="posting-contents"
-          className="markdown-body w-full pt-12"
+          className="markdown-body w-full pt-10 md:pt-12"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         ></section>
       </article>

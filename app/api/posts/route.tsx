@@ -1,3 +1,4 @@
+import { siteConfig } from '@/config/site';
 import { getTimeToRead } from '@/lib/md-util';
 import { getRandomColor } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
@@ -20,6 +21,7 @@ export async function GET(request: Request): Promise<Response> {
     const tags = frontmatter.tags.map((t: string) => ({ name: t, color: getRandomColor() }));
     return {
       slug,
+      href: `${siteConfig.baseURL}/blog${slug.startsWith('/') ? slug : '/' + slug}`,
       title: frontmatter.title,
       createdAt: frontmatter.createdAt || frontmatter.date,
       description: frontmatter.description,

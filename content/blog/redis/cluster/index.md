@@ -2,6 +2,7 @@
 title: Docker로 Redis 클러스터 구성하기
 date: "2022-02-18"
 tags: [Redis, Docker]
+description: 로컬 환경 테스트를 위한 Dokcer cluster를 docker-compose로 구성하는 과정을 알아봅니다.
 ---
 
 # 레디스

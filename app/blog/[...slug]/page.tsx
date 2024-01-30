@@ -1,32 +1,16 @@
-import { PostResponseData } from '@/app/api/posts/[...slug]/route';
 import Utterances from '@/components/comments/utterances';
 import { TagBadges } from '@/components/tags/badges';
 import TimeToReadText from '@/components/text/time-to-read';
 import { Typography } from '@/components/typography/typography';
-import { siteConfig } from '@/config/site';
 import { formatDate } from '@/lib/date-util';
 import 'highlight.js/styles/atom-one-light.min.css';
 import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import './page.css';
-
-async function getData(slug: string | string[]): Promise<Required<PostResponseData>> {
-  const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
-  const res = await fetch(siteConfig.baseURL + '/api/posts/' + _slugParam);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
-  const data = (await res.json()) as PostResponseData;
-  if (!data) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Post not found');
-  }
-  return data;
-}
+import { getOnePostDetail } from '@/hooks/quries/get-one-post-detail';
 
 export async function generateMetadata({ params }: BlogSlugPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const { frontmatter } = await getData(params.slug);
+  const { frontmatter } = await getOnePostDetail(params.slug);
   const previousImages = (await parent).openGraph?.images || [];
   return {
     title: frontmatter.title,
@@ -38,7 +22,6 @@ export async function generateMetadata({ params }: BlogSlugPageProps, parent: Re
     },
   };
 }
-
 interface BlogSlugPageProps {
   params: BlogSlugPageParams;
 }
@@ -46,7 +29,8 @@ interface BlogSlugPageParams {
   slug: string | string[];
 }
 export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
-  const data = await getData(params.slug);
+  const data = await getOnePostDetail(params.slug);
+
   const { contentHtml, frontmatter } = data;
   return (
     <div className="flex min-h-screen flex-col items-center justify-between md:px-12 md:py-8">

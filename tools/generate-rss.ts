@@ -1,5 +1,5 @@
-import { PostsResponseData } from '@/app/api/posts/route';
 import { siteConfig } from '@/config/site';
+import { PostsResponseData } from '@/hooks/quries/get-posts';
 import fs from 'fs';
 import RSS from 'rss';
 

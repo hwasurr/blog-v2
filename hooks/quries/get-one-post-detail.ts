@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+'use server';
 import { readFileAsync } from '@/lib/file-utils';
-import path from 'path';
+import { getTimeToRead } from '@/lib/md-util';
+import { getRandomColor } from '@/lib/utils';
+import { FrontMatterRaw, PostDetail } from '@/types/post.type';
 import matter from 'gray-matter';
 import hljs from 'highlight.js';
 import markdownit from 'markdown-it';
 import markdownItAncherPlugin from 'markdown-it-anchor';
-import { getTimeToRead } from '@/lib/md-util';
-import { PostDetail } from '@/types/post.type';
-import { getRandomColor } from '@/lib/utils';
+import path from 'path';
 
 async function getMarkdown(slug: string): Promise<Buffer | null> {
   const url = path.resolve(`./content/blog/${Array.isArray(slug) ? slug.join('/') : slug}/index.md`);
@@ -29,14 +29,15 @@ const md = markdownit({
 md.use(markdownItAncherPlugin, {
   permalink: markdownItAncherPlugin.permalink.ariaHidden({ placement: 'before', class: 'anchor' }),
 });
-export type PostResponseData = PostDetail;
-export async function GET(request: Request, { params }: { params: { slug: string } }): Promise<Response> {
-  const markdown = await getMarkdown(params.slug);
-  if (!markdown) return Response.json({ data: undefined });
-  const { content, data: frontmatter } = matter(markdown);
+export async function getOnePostDetail(slug: string | string[]): Promise<PostDetail> {
+  const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
+  const markdown = await getMarkdown(_slugParam);
+  if (!markdown) throw new Error('Post not found');
+  const { content, data: _frontmatter } = matter(markdown);
+  const frontmatter = _frontmatter as FrontMatterRaw;
   const contentHtml = md.render(content);
-  const timeToRead = frontmatter.timeToRead || getTimeToRead(content);
+  const timeToRead = (frontmatter.timeToRead || getTimeToRead(content)) as number;
   const tags = frontmatter.tags.map((t: string) => ({ name: t, color: getRandomColor() }));
   const resp = { content, frontmatter: { ...frontmatter, timeToRead, tags }, contentHtml };
-  return Response.json(resp); // Fetch posts
+  return resp;
 }

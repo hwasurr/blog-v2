@@ -17,11 +17,14 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import { navConfig } from '@/config/nav';
-import { getPosts } from '@/hooks/quries/get-posts';
 import { cn } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
 
-export function CommandMenu({ ...props }: DialogProps): JSX.Element {
+export type MobileNavProps = DialogProps & {
+  posts: PostSummary[];
+};
+export function CommandMenu({ ...props }: MobileNavProps): JSX.Element {
+  const posts = props.posts;
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const { setTheme } = useTheme();
@@ -51,15 +54,6 @@ export function CommandMenu({ ...props }: DialogProps): JSX.Element {
   const runCommand = React.useCallback((command: () => unknown) => {
     setOpen(false);
     command();
-  }, []);
-
-  const [posts, setPosts] = React.useState<PostSummary[]>([]);
-  React.useEffect(() => {
-    async function getDate(): Promise<void> {
-      const result = await getPosts();
-      setPosts(result.data || []);
-    }
-    getDate();
   }, []);
 
   return (

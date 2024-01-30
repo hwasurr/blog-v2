@@ -1,4 +1,5 @@
 'use server';
+import { serverConfig } from '@/config/server';
 import { siteConfig } from '@/config/site';
 import { getTimeToRead } from '@/lib/md-util';
 import { getRandomColor } from '@/lib/utils';
@@ -7,9 +8,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import * as path from 'path';
 
-const mdfileExtension = 'md';
-const contentsDirectory = 'content/blog';
-const mdfilename = `/index.${mdfileExtension}`;
+const { contentsDirectory, mdfileExtension, mdfilename } = serverConfig;
 
 export type PostsResponseData = { data: PostSummary[] };
 export async function getPosts(): Promise<PostsResponseData> {

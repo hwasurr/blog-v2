@@ -9,22 +9,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { navConfig } from '@/config/nav';
 import { siteConfig } from '@/config/site';
-import { getPosts } from '@/hooks/quries/get-posts';
 import { cn } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
 
-export function MobileNav(): JSX.Element {
+export interface MobileNavProps {
+  posts: PostSummary[];
+}
+export function MobileNav({ posts }: MobileNavProps): JSX.Element {
   const [open, setOpen] = React.useState(false);
-
-  const [posts, setPosts] = React.useState<PostSummary[]>([]);
-  React.useEffect(() => {
-    async function getDate(): Promise<void> {
-      const result = await getPosts();
-      setPosts(result.data || []);
-    }
-    getDate();
-  }, []);
-
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>

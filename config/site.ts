@@ -1,5 +1,5 @@
 export const siteConfig = {
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://hwasurr.com' : 'http://localhost:3000',
+  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost:3000' : 'http://localhost:3000',
   name: "Hwasurr's Devlog",
   profile: {
     name: 'hwasurr',

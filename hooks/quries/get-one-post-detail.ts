@@ -11,8 +11,12 @@ import path from 'path';
 
 async function getMarkdown(slug: string): Promise<Buffer | null> {
   const url = path.resolve(`./content/blog/${Array.isArray(slug) ? slug.join('/') : slug}/index.md`);
-  const markdown = await readFileAsync(url);
-  return markdown || null;
+  try {
+    const markdown = await readFileAsync(url);
+    return markdown || null;
+  } catch (err) {
+    return null;
+  }
 }
 const md = markdownit({
   linkify: true,
@@ -29,10 +33,10 @@ const md = markdownit({
 md.use(markdownItAncherPlugin, {
   permalink: markdownItAncherPlugin.permalink.ariaHidden({ placement: 'before', class: 'anchor' }),
 });
-export async function getOnePostDetail(slug: string | string[]): Promise<PostDetail> {
+export async function getOnePostDetail(slug: string | string[]): Promise<PostDetail | null> {
   const _slugParam = Array.isArray(slug) ? slug.join('/') : slug;
   const markdown = await getMarkdown(_slugParam);
-  if (!markdown) throw new Error('Post not found');
+  if (!markdown) return null;
   const { content, data: _frontmatter } = matter(markdown);
   const frontmatter = _frontmatter as FrontMatterRaw;
   const contentHtml = md.render(content);

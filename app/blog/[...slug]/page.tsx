@@ -8,17 +8,18 @@ import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import './page.css';
 import { getOnePostDetail } from '@/hooks/quries/get-one-post-detail';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }: BlogSlugPageProps, parent: ResolvingMetadata): Promise<Metadata> {
-  const { frontmatter } = await getOnePostDetail(params.slug);
+  const { frontmatter } = (await getOnePostDetail(params.slug)) || {};
   const previousImages = (await parent).openGraph?.images || [];
   return {
-    title: frontmatter.title,
-    description: frontmatter.description,
-    keywords: frontmatter.tags.map((t) => t.name),
+    title: frontmatter?.title,
+    description: frontmatter?.description,
+    keywords: frontmatter?.tags.map((t) => t.name),
     creator: 'Hwasoo Kang',
     openGraph: {
-      images: [frontmatter.image?.src || '', ...previousImages],
+      images: [frontmatter?.image?.src || '', ...previousImages],
     },
   };
 }
@@ -30,7 +31,7 @@ interface BlogSlugPageParams {
 }
 export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
   const data = await getOnePostDetail(params.slug);
-
+  if (!data) return notFound();
   const { contentHtml, frontmatter } = data;
   return (
     <div className="flex min-h-screen flex-col items-center justify-between md:px-12 md:py-8">
@@ -38,23 +39,21 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
         {/* posting metadata */}
         <section id="posting-metadata" className="flex flex-col justify-center gap-4 pb-4 md:pb-12">
           {frontmatter.image ? (
-            <>
-              <figure>
-                <div className="relative min-h-80 w-full">
-                  <Image
-                    className="rounded-xl object-cover"
-                    src={frontmatter.image.src}
-                    alt={frontmatter.title}
-                    fill
-                    placeholder="empty"
-                  ></Image>
-                </div>
-                <figcaption className="my-2 text-center text-xs italic text-muted-foreground">
-                  {frontmatter.image.description}{' '}
-                  {frontmatter.image.author ? `(Pictured by ${frontmatter.image.author})` : null}
-                </figcaption>
-              </figure>
-            </>
+            <figure>
+              <div className="relative min-h-80 w-full">
+                <Image
+                  className="rounded-xl object-cover"
+                  src={frontmatter.image.src}
+                  alt={frontmatter.title}
+                  fill
+                  placeholder="empty"
+                ></Image>
+              </div>
+              <figcaption className="my-2 text-center text-xs italic text-muted-foreground">
+                {frontmatter.image.description}{' '}
+                {frontmatter.image.author ? `(Pictured by ${frontmatter.image.author})` : null}
+              </figcaption>
+            </figure>
           ) : null}
           <Typography.h1>{frontmatter.title}</Typography.h1>
           <Typography.muted>{frontmatter.description}</Typography.muted>

@@ -69,7 +69,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
         {/* posting contents */}
         <section
           id="posting-contents"
-          className="markdown-body w-full pt-10 md:pt-12"
+          className="markdown-body w-full pb-14"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         ></section>
       </article>

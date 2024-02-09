@@ -5,7 +5,10 @@ export const Typography = {
   h1: function H1(props: PropsWithChildren<React.HTMLProps<HTMLHeadingElement>>): JSX.Element {
     const { className, ...restProps } = props;
     return (
-      <h1 className={cn('scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl', className)} {...restProps}>
+      <h1
+        className={cn('scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl lg:leading-tight', className)}
+        {...restProps}
+      >
         {props.children}
       </h1>
     );

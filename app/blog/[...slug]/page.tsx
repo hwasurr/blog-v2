@@ -55,7 +55,7 @@ export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promi
               </figcaption>
             </figure>
           ) : null}
-          <Typography.h1>{frontmatter.title}</Typography.h1>
+          <Typography.h1 className="leading-tight">{frontmatter.title}</Typography.h1>
           <Typography.muted>{frontmatter.description}</Typography.muted>
           <TagBadges tags={frontmatter.tags} />
           <Typography.muted>

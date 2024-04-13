@@ -17,7 +17,7 @@ export function PostCard(props: PostCardProps): JSX.Element {
       <CardHeader className="pb-1 md:pb-4">
         <TagBadges tags={tags} />
         <Link passHref href={'/blog' + slug}>
-          <CardTitle className="leading-8 hover:text-sky-600">{title}</CardTitle>
+          <CardTitle className="leading-8 hover:text-blue-600">{title}</CardTitle>
         </Link>
         <CardDescription>
           <span className="md:hidden">{`${createdAt} • `}</span>

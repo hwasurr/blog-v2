@@ -597,6 +597,14 @@
 .markdown-body h6:hover .anchor {
   text-decoration: none;
 }
+.markdown-body h1 .anchor:hover,
+.markdown-body h2 .anchor:hover,
+.markdown-body h3 .anchor:hover,
+.markdown-body h4 .anchor:hover,
+.markdown-body h5 .anchor:hover,
+.markdown-body h6 .anchor:hover {
+  text-decoration: underline;
+}
 
 .markdown-body h1:hover .anchor .octicon-link,
 .markdown-body h2:hover .anchor .octicon-link,

@@ -4,6 +4,7 @@ import { ToggleThemeButton } from '../buttons/toggle-theme-button';
 import { CommandMenu } from './command-menu';
 import { MainNav } from './main-nav';
 import { MobileNav } from './mobile-nav';
+import { ScrollIndicator } from '@/components/nav/scroll-indicator';
 
 export async function SiteHeader(): Promise<JSX.Element> {
   const posts = await getPosts();
@@ -22,6 +23,7 @@ export async function SiteHeader(): Promise<JSX.Element> {
           </nav>
         </div>
       </div>
+      <ScrollIndicator />
     </header>
   );
 }

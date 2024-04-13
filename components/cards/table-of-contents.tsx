@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import { TocNode, useTableOfContents } from '@/hooks/use-table-of-contents';
 import { cn } from '@/lib/utils';
-import { MouseEvent } from 'react';
 
 export function TableOfContentsCard(): JSX.Element {
   const items = useTableOfContents();

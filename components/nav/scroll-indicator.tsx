@@ -17,7 +17,17 @@ export function ScrollIndicator(): JSX.Element | null {
     };
   }, []);
 
-  if (!window.location.pathname.startsWith('/blog')) return null;
+  const [isBlogPage, setIsBlogPage] = useState(false);
+  useEffect(() => {
+    if (!window.location.pathname.startsWith('/blog')) {
+      setIsBlogPage(false);
+    } else {
+      setIsBlogPage(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.location.pathname]);
+
+  if (!isBlogPage) return null;
 
   return (
     <div className="sticky w-full">

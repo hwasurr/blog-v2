@@ -11,21 +11,21 @@ export function ScrollIndicator(): JSX.Element | null {
       setProgress(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window?.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window?.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const [isBlogPage, setIsBlogPage] = useState(false);
   useEffect(() => {
-    if (!window.location.pathname.startsWith('/blog')) {
+    if (!window?.location.pathname.startsWith('/blog')) {
       setIsBlogPage(false);
     } else {
       setIsBlogPage(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.location.pathname]);
+  }, [window?.location?.pathname]);
 
   if (!isBlogPage) return null;
 

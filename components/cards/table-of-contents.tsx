@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { TocNode, useTableOfContents } from '@/hooks/use-table-of-contents';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
+import { MouseEvent } from 'react';
 
 export function TableOfContentsCard(): JSX.Element {
   const items = useTableOfContents();
@@ -33,9 +33,12 @@ interface TableOfContentsItemProps extends TocNode {
 function TableOfContentsItem(props: TableOfContentsItemProps): JSX.Element {
   const { contents, nodeName, childNodes, link, depth = 0, paddingSize = 10 } = props;
   const _contents = contents.startsWith('# ') ? contents.slice(2, contents.length) : contents;
+  const handleClick = (hash: string) => (): void => {
+    history.replaceState({}, document.title, hash);
+  };
   return (
     <div style={{ marginLeft: paddingSize * depth }}>
-      <a className="anchor" href={link} target="_self">
+      <a className="anchor" href={link} target="_self" onClick={handleClick(link)}>
         <Button variant="link" className={cn('h-auto p-0 text-blue-600 dark:text-blue-600')}>
           {_contents}
         </Button>

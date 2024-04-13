@@ -19,7 +19,7 @@ export default function BlogHome({ children }: PropsWithChildren): JSX.Element {
 
       <aside
         id="sidebar-right"
-        className="sticky top-[121px] hidden h-[calc(100vh-121px)] w-[320px] py-2 lg:flex lg:shrink-0 lg:flex-col lg:justify-between"
+        className="sticky top-[121px] hidden h-[calc(100vh-121px)] max-h-full w-[320px] overflow-y-auto py-2 lg:flex lg:shrink-0 lg:flex-col lg:justify-between"
       >
         <TableOfContentsCard />
         <ProfileCard />

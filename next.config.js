@@ -59,6 +59,11 @@ const nextConfig = {
         destination: '/blog/redis/cluster',
         permanent: true,
       },
+      {
+        source: '/resume',
+        destination: 'https://hwasurr.notion.site/5df50182387a49b4bfec406d644a9d13?pvs=4',
+        permanent: false,
+      },
     ];
   },
 };

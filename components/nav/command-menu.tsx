@@ -79,7 +79,7 @@ export function CommandMenu({ ...props }: MobileNavProps): JSX.Element {
         </div>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="검색어나 명령을 입력하세요..." />
+        <CommandInput placeholder="검색어를 입력하거나 위/아래 화살표로 둘러보세요..." />
         <CommandList>
           <CommandEmpty>원하시는 결과를 찾을 수 없어요..</CommandEmpty>
           <CommandGroup heading="Links">
@@ -103,7 +103,7 @@ export function CommandMenu({ ...props }: MobileNavProps): JSX.Element {
             {posts.map((post) => (
               <CommandItem
                 key={post.slug}
-                value={post.title}
+                value={`${post.title}/${post.tags?.map((t) => t.name).join('/')}/${post.description || ''}`}
                 onSelect={() => {
                   runCommand(() => router.push(('/blog' + post.slug) as string));
                 }}

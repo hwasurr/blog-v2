@@ -2,6 +2,7 @@ export interface NavItem {
   title: string;
   href?: string;
   disabled?: boolean;
+  /** 커맨드 메뉴에 보여야할 지 항목 */
   external?: boolean;
   icon?: unknown;
   label?: string;

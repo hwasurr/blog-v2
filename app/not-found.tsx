@@ -5,8 +5,7 @@ import { JSX } from 'react';
 
 export default function NotFound(): JSX.Element {
   return (
-    <div className="grid h-[calc(100vh-121px+64px)] grid-cols-1 md:grid-cols-2">
-      <div className="invisible h-full bg-slate-700 md:visible"></div>
+    <div className="grid h-[calc(100vh-121px+64px)] grid-cols-1 md:grid-cols-1">
       <div className="flex flex-col items-center justify-center p-4">
         <Typography.h1>404</Typography.h1>
         <Typography.muted>요청하신 페이지를 찾지 못했어요.</Typography.muted>

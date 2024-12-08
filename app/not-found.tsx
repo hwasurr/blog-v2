@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import { Typography } from '@/components/typography/typography';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { JSX } from 'react';
 
 export default function NotFound(): JSX.Element {
   return (

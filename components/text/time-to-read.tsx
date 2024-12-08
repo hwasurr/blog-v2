@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { useMemo } from 'react';
+import { JSX, useMemo } from 'react';
 
 const timeToCoffee = 5;
 const timeToPizza = timeToCoffee * 2;

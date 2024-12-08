@@ -1,6 +1,6 @@
 'use client';
 
-import { DialogProps } from '@radix-ui/react-alert-dialog';
+import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
 import { CircleIcon, FileIcon, LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
@@ -19,8 +19,9 @@ import {
 import { navConfig } from '@/config/nav';
 import { cn } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
+import { JSX } from 'react';
 
-export type MobileNavProps = DialogProps & {
+export type MobileNavProps = AlertDialogProps & {
   posts: PostSummary[];
 };
 export function CommandMenu({ ...props }: MobileNavProps): JSX.Element {

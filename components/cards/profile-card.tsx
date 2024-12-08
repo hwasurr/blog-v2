@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardTitle } from '@/components/ui/card';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
+import { JSX } from 'react';
 
 export function ProfileCard(): JSX.Element {
   return (

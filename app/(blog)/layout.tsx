@@ -1,5 +1,5 @@
 import { ProfileCard } from '@/components/cards/profile-card';
-import { PropsWithChildren } from 'react';
+import { JSX, PropsWithChildren } from 'react';
 
 export default function BlogHome({ children }: PropsWithChildren): JSX.Element {
   return (

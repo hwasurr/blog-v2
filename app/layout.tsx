@@ -1,11 +1,12 @@
+import { SiteFooter } from '@/components/footer/site-footer';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from '../providers/theme.provider';
+import { JSX } from 'react';
 import { SiteHeader } from '../components/nav/site-header';
-import { SiteFooter } from '@/components/footer/site-footer';
+import { ThemeProvider } from '../providers/theme.provider';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <html lang="ko">
+      {/** https://github.com/shadcn-ui/ui/issues/5552 */}
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteHeader></SiteHeader>

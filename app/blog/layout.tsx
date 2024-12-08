@@ -1,7 +1,7 @@
 import { ProfileCard } from '@/components/cards/profile-card';
-import { PropsWithChildren } from 'react';
-import { Metadata } from 'next';
 import { TableOfContentsCard } from '@/components/cards/table-of-contents';
+import { Metadata } from 'next';
+import { JSX, PropsWithChildren } from 'react';
 
 export const metadata: Metadata = {
   title: {

@@ -2,6 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { type PostSummary } from '@/types/post.type';
+import { JSX } from 'react';
 
 export function TagBadges({ tags }: { tags: PostSummary['tags'] }): JSX.Element {
   return (

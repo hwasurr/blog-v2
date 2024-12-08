@@ -11,6 +11,7 @@ import { navConfig } from '@/config/nav';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { PostSummary } from '@/types/post.type';
+import { JSX } from 'react';
 
 export interface MobileNavProps {
   posts: PostSummary[];

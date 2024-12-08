@@ -1,4 +1,5 @@
 import { Typography } from '@/components/typography/typography';
+import { JSX } from 'react';
 
 export function SiteFooter(): JSX.Element {
   return (

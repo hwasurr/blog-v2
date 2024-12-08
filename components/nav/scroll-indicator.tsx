@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 
 export function ScrollIndicator(): JSX.Element | null {
   const [progress, setProgress] = useState(0);

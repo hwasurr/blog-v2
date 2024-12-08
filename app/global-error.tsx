@@ -1,7 +1,9 @@
 'use client';
 
+import { JSX } from 'react';
+
 export default function GlobalError({
-  error,
+  error: __error,
   reset,
 }: {
   error: Error & { digest?: string };

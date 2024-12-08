@@ -30,7 +30,7 @@ const Utterances: React.FC<UtterancesProps> = React.memo(({ repo, theme, slug })
     });
 
     containerRef.current?.appendChild(utterances);
-  }, [containerRef, repo, theme]);
+  }, [containerRef, repo, theme, slug]);
 
   return <div ref={containerRef} />;
 });

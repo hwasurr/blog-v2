@@ -2,15 +2,17 @@ import Utterances from '@/components/comments/utterances';
 import { TagBadges } from '@/components/tags/badges';
 import TimeToReadText from '@/components/text/time-to-read';
 import { Typography } from '@/components/typography/typography';
+import { getOnePostDetail } from '@/hooks/quries/get-one-post-detail';
 import { formatDate } from '@/lib/date-util';
 import 'highlight.js/styles/atom-one-light.min.css';
 import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
-import './page.css';
-import { getOnePostDetail } from '@/hooks/quries/get-one-post-detail';
 import { notFound } from 'next/navigation';
+import { JSX } from 'react';
+import './page.css';
 
-export async function generateMetadata({ params }: BlogSlugPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(props: BlogSlugPageProps, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const { frontmatter } = (await getOnePostDetail(params.slug)) || {};
   const previousImages = (await parent).openGraph?.images || [];
   return {
@@ -24,12 +26,13 @@ export async function generateMetadata({ params }: BlogSlugPageProps, parent: Re
   };
 }
 interface BlogSlugPageProps {
-  params: BlogSlugPageParams;
+  params: Promise<BlogSlugPageParams>;
 }
 interface BlogSlugPageParams {
   slug: string | string[];
 }
-export default async function BlogSlugPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
+export default async function BlogSlugPage(props: BlogSlugPageProps): Promise<JSX.Element> {
+  const params = await props.params;
   const data = await getOnePostDetail(params.slug);
   if (!data) return notFound();
   const { contentHtml, frontmatter } = data;

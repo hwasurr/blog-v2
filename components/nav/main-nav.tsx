@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
+import { JSX } from 'react';
 import { navConfig } from '../../config/nav';
 
 export function MainNav(): JSX.Element {

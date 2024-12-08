@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { useTagFilterStore } from '@/store/tag-filter-store';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
-import { useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 
 export function TagSelector(): JSX.Element {
   const { selectedTag } = useTagFilterStore.getState();
@@ -15,7 +15,7 @@ export function TagSelector(): JSX.Element {
     setOpen((x) => !x);
   }
 
-  const [tags, setTags] = useState<{ label: string; value: string }[]>([]);
+  const [tags, __setTags] = useState<{ label: string; value: string }[]>([]);
   useEffect(() => {
     const getTags = async (): Promise<void> => {
       // const res = await fetch(siteConfig.baseURL + '/api/posts/tags');

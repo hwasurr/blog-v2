@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { JSX } from 'react';
 import { siteConfig } from '../../config/site';
 import { cn } from '../../lib/utils';
-import { buttonVariants } from '../ui/button';
 import { Icons } from '../icons/icons';
+import { buttonVariants } from '../ui/button';
 
 export function GithubLinkButton(): JSX.Element {
   return (

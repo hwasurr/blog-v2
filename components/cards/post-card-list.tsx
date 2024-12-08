@@ -1,6 +1,7 @@
 'use server';
 import { PostCard } from '@/components/cards/post-card';
 import { getPosts } from '@/hooks/quries/get-posts';
+import { JSX } from 'react';
 
 export default async function PostCardList(): Promise<JSX.Element> {
   const { data: cardList } = await getPosts();

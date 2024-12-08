@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { formatDate } from '@/lib/date-util';
 import { type PostSummary } from '@/types/post.type';
 import Link from 'next/link';
+import { JSX } from 'react';
 
 interface PostCardProps {
   data: PostSummary;

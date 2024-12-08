@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { TocNode, useTableOfContents } from '@/hooks/use-table-of-contents';
 import { cn } from '@/lib/utils';
+import { JSX } from 'react';
 
 export function TableOfContentsCard(): JSX.Element {
   const items = useTableOfContents();
@@ -29,7 +30,9 @@ interface TableOfContentsItemProps extends TocNode {
   depth?: number;
   paddingSize?: number;
 }
-function TableOfContentsItem(props: TableOfContentsItemProps): JSX.Element {
+type NewType = JSX.Element;
+
+function TableOfContentsItem(props: TableOfContentsItemProps): NewType {
   const { contents, nodeName, childNodes, link, depth = 0, paddingSize = 10 } = props;
   const _contents = contents.startsWith('# ') ? contents.slice(2, contents.length) : contents;
   const handleClick = (hash: string) => (): void => {

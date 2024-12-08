@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ComponentProps } from 'react';
+import { ComponentProps, JSX } from 'react';
 interface ToggleThemeButtonProps {
   variant?: ComponentProps<typeof Button>['variant'];
 }
@@ -22,7 +22,7 @@ export function ToggleThemeButton(props: ToggleThemeButtonProps): JSX.Element {
     setTheme(_theme);
     const preferTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const theme = _theme !== 'system' ? _theme : preferTheme ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme.toString());
   }
 
   return (
